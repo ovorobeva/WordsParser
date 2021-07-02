@@ -46,6 +46,7 @@ public class WordsJSON {
     public void saveToFile(List<GeneratedWords> words) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JSONArray wordsArray = new JSONArray();
+
         for (GeneratedWords generatedWord : loadedWords) {
             JSONObject word = null;
             try {
