@@ -1,4 +1,4 @@
-package translateclient;
+package translates;
 
 import dto.translation.Translate;
 import retrofit2.Call;

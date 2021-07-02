@@ -1,4 +1,4 @@
-package translateclient;
+package translates;
 
 import dto.generated.GeneratedWords;
 import dto.translation.Translate;

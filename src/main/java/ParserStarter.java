@@ -1,14 +1,11 @@
 import dto.generated.GeneratedWords;
 import exceptions.TokenIsRequiredException;
-import wordsprocessing.WordsClient;
-import translateclient.TranslateClient;
+import translates.Translation;
 import wordsprocessing.WordsProcessing;
 import wordssaving.Token;
 import wordssaving.WordsJSON;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
 
 public class ParserStarter {
     public static void main(String[] args) {
@@ -28,27 +25,9 @@ public class ParserStarter {
 
         String path = "src\\main\\resources";
 
-        TranslateClient translateClient = TranslateClient.getTranslateClient();
-
-        List<GeneratedWords> wordList;
-
         WordsProcessing wordsProcessing = new WordsProcessing();
-        try {
-            wordList = new LinkedList<>(wordsProcessing.getWords());
-        } catch (InterruptedException e) {
-            wordList = new LinkedList<>();
-            e.printStackTrace();
-        }
+        List<GeneratedWords> wordList = new Translation().getTranslates(wordsProcessing);
 
-        WordsClient.logger.log(Level.INFO, "Parsing finished. Words are: " + wordList);
-
-        try {
-            for (GeneratedWords word : wordList) {
-                translateClient.getTranslate(word);
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         WordsJSON wordsJson = new WordsJSON(wordList, path, token);
         wordsJson.saveToFile();
     }
