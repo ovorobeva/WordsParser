@@ -62,19 +62,22 @@ public class JSONCreator {
             System.out.println("Uncommitted changes are: " + status.getUncommittedChanges());
             System.out.println("Changes are: " + status.getChanged());
 
-            RemoteAddCommand remoteAddCommand = git.remoteAdd();
+
+
+     /*       RemoteAddCommand remoteAddCommand = git.remoteAdd();
             remoteAddCommand.setName("origin");
             remoteAddCommand.setUri(new URIish("git@github.com:ovorobeva/WordsParser.git"));
             remoteAddCommand.call();
-
+            */
 
             PushCommand pushCommand = git.push();
+            pushCommand.setRemote("git@github.com:ovorobeva/WordsParser.git");
             pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider("ovorobeva", token.getToken()));
 
             pushCommand.add("master");
             pushCommand.setRemote("origin");
             pushCommand.call();
-        } catch (IOException | GitAPIException | URISyntaxException e) {
+        } catch (IOException | GitAPIException e) {
         e.printStackTrace();
     }
 
