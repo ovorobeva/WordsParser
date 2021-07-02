@@ -56,7 +56,7 @@ public class WordsJSON {
             }
             wordsArray.add(word);
         }
-
+//todo: to check duplicates and uncensored words
         for (GeneratedWords generatedWord : words) {
             JSONObject word = null;
             try {
