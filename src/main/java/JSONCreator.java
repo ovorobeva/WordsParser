@@ -73,6 +73,7 @@ public class JSONCreator {
             pushCommand.add("master");
             pushCommand.setRemote("origin");
             pushCommand.call();
+
         } catch (IOException | GitAPIException e) {
         e.printStackTrace();
     }
