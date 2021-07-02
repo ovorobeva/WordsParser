@@ -22,6 +22,7 @@ import wordsprocessing.WordsClient;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -103,7 +104,7 @@ public class WordsJSON {
 
         Call<List<GeneratedWords>> jsonFromRepositoryRequest = wordsJSONApi.sendRequest();
 
-        List<GeneratedWords> responseBody = null;
+        List<GeneratedWords> responseBody = new LinkedList<>();
         try {
             Response<List<GeneratedWords>> response = jsonFromRepositoryRequest.execute();
             if (response.isSuccessful()) {
