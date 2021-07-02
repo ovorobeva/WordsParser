@@ -63,13 +63,6 @@ public class JSONCreator {
             System.out.println("Changes are: " + status.getChanged());
 
 
-
-     /*       RemoteAddCommand remoteAddCommand = git.remoteAdd();
-            remoteAddCommand.setName("origin");
-            remoteAddCommand.setUri(new URIish("git@github.com:ovorobeva/WordsParser.git"));
-            remoteAddCommand.call();
-            */
-
             PushCommand pushCommand = git.push();
             pushCommand.setRemote("git@github.com:ovorobeva/WordsParser.git");
             pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider("ovorobeva", token.getToken()));
