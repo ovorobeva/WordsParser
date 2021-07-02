@@ -1,5 +1,7 @@
+package wordsprocessing;
+
 import dto.generated.GeneratedWords;
-import gettingwordsclient.WordsClient;
+import wordsprocessing.WordsClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 

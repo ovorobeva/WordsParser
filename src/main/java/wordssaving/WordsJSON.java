@@ -1,14 +1,14 @@
+package wordssaving;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.generated.GeneratedWords;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PushCommand;
-import org.eclipse.jgit.api.RemoteAddCommand;
 import org.eclipse.jgit.api.Status;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,15 +17,14 @@ import org.json.simple.JSONArray;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 
-public class JSONCreator {
+public class WordsJSON {
     String path;
     private List<GeneratedWords> words;
     Token token;
 
-    public JSONCreator(List<GeneratedWords> words, String path, Token token) {
+    public WordsJSON(List<GeneratedWords> words, String path, Token token) {
         this.words = words;
         this.path = path;
         this.token = token;
@@ -47,10 +46,10 @@ public class JSONCreator {
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-        pushToRemoteSteam();
+        saveFileToRepository();
     }
 
-    private void pushToRemoteSteam() {
+    private void saveFileToRepository() {
         try {
             Repository repository = new FileRepository("D:\\Projects\\WordsParser\\.git");
 
@@ -81,7 +80,7 @@ public class JSONCreator {
     }
 
 
-    public void getFile() {
+    public void getFileFromRepository() {
 
     }
 }

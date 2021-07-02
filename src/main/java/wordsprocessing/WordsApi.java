@@ -1,4 +1,4 @@
-package gettingwordsclient;
+package wordsprocessing;
 
 import dto.partsofspeech.PartsOfSpeech;
 import dto.words.WordsMessage;

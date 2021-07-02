@@ -1,3 +1,5 @@
+package wordssaving;
+
 import exceptions.TokenIsRequiredException;
 
 public class Token {

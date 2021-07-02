@@ -1,7 +1,10 @@
 import dto.generated.GeneratedWords;
 import exceptions.TokenIsRequiredException;
-import gettingwordsclient.WordsClient;
+import wordsprocessing.WordsClient;
 import translateclient.TranslateClient;
+import wordsprocessing.WordsProcessing;
+import wordssaving.Token;
+import wordssaving.WordsJSON;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,7 +21,7 @@ public class ParserStarter {
         try {
             token = new Token(tokenFromArg);
         } catch (TokenIsRequiredException e) {
-            System.out.println("Token is required, please, specify your token when starting");
+            System.out.println("wordssaving.Token is required, please, specify your token when starting");
             e.printStackTrace();
             System.exit(-1);
         }
@@ -46,7 +49,7 @@ public class ParserStarter {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        JSONCreator jsonCreator = new JSONCreator(wordList, path, token);
-        jsonCreator.saveToFile();
+        WordsJSON wordsJson = new WordsJSON(wordList, path, token);
+        wordsJson.saveToFile();
     }
 }
