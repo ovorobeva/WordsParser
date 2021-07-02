@@ -23,7 +23,7 @@ public class ParserStarter {
             System.exit(-1);
         }
 
-        String path = "src\\main\\java";
+        String path = "src\\main\\resources";
 
         TranslateClient translateClient = TranslateClient.getTranslateClient();
 
