@@ -56,10 +56,9 @@ public class JSONCreator {
 
         Git git = new Git(repository) ;
             Status status = git.status().call();
-            System.out.println("Uncommitted changes are: " + status.getUncommittedChanges());
-            System.out.println("Changes are: " + status.getChanged());
             git.commit().setAll(true).setMessage("Words json is updated")
                     .setAuthor("Olga Vorobeva", "passant.dlm@gmail.com").call();
+
             System.out.println("Uncommitted changes are: " + status.getUncommittedChanges());
             System.out.println("Changes are: " + status.getChanged());
 
