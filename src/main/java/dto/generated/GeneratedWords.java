@@ -1,14 +1,15 @@
 package dto.generated;
 
-import javax.annotation.Generated;
-
 public class GeneratedWords {
 
     private Integer id;
     private String en;
     private String ru;
 
-    public GeneratedWords(@Generated("") Integer id, String en) {
+    public GeneratedWords() {
+    }
+
+    public GeneratedWords(Integer id, String en) {
         this.id = id;
         this.en = en.toLowerCase();
     }
