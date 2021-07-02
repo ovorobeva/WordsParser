@@ -44,10 +44,10 @@ public class JSONCreator {
             }
 
             writer.write(wordsArray.toString());
-            pushToRemoteSteam();
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
+        pushToRemoteSteam();
     }
 
     private void pushToRemoteSteam() {
