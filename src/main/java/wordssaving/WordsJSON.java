@@ -49,16 +49,22 @@ public class WordsJSON {
         for (GeneratedWords generatedWord : loadedWords) {
             wordsArray.add(gson.toJson(generatedWord));
         }
+        for (GeneratedWords generatedWord : words) {
+            JSONObject word = null;
+            try {
+                word = new JSONObject(gson.toJson(generatedWord));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            wordsArray.add(word);
+        }
+        
         File targetFile = new File("src\\main\\resources\\words_source_v0.json");
 
         try (FileWriter writer = new FileWriter(targetFile)) {
-            for (GeneratedWords generatedWord : words) {
-                JSONObject word = new JSONObject(gson.toJson(generatedWord));
-                wordsArray.add(word);
-            }
 
             writer.write(wordsArray.toString());
-        } catch (IOException | JSONException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         saveFileToRepository();
