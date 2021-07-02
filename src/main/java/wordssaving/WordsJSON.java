@@ -47,8 +47,15 @@ public class WordsJSON {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JSONArray wordsArray = new JSONArray();
         for (GeneratedWords generatedWord : loadedWords) {
-            wordsArray.add(gson.toJson(generatedWord));
+            JSONObject word = null;
+            try {
+                word = new JSONObject(gson.toJson(generatedWord));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            wordsArray.add(word);
         }
+
         for (GeneratedWords generatedWord : words) {
             JSONObject word = null;
             try {
@@ -58,7 +65,7 @@ public class WordsJSON {
             }
             wordsArray.add(word);
         }
-        
+
         File targetFile = new File("src\\main\\resources\\words_source_v0.json");
 
         try (FileWriter writer = new FileWriter(targetFile)) {
