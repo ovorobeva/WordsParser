@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ParserStarter {
     public static void main(String[] args) {
+
         String tokenFromArg;
         if (args.length == 0) {
             tokenFromArg = "Not found";
@@ -23,12 +24,11 @@ public class ParserStarter {
             System.exit(-1);
         }
 
-        String path = "src\\main\\resources";
+        WordsJSON wordsJson = new WordsJSON(token);
 
-        WordsProcessing wordsProcessing = new WordsProcessing();
+        WordsProcessing wordsProcessing = new WordsProcessing(wordsJson.getLastId());
         List<GeneratedWords> wordList = new Translation().getTranslates(wordsProcessing);
 
-        WordsJSON wordsJson = new WordsJSON(wordList, path, token);
-        wordsJson.saveToFile();
+        wordsJson.saveToFile(wordList);
     }
 }

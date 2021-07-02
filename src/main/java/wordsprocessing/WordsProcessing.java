@@ -1,7 +1,6 @@
 package wordsprocessing;
 
 import dto.generated.GeneratedWords;
-import wordsprocessing.WordsClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -13,6 +12,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class WordsProcessing {
+    private int id = 0;
+
+    public WordsProcessing(int id) {
+        this.id = id;
+    }
 
     private static Boolean isPartOfSpeechCorrect(String word, WordsClient wordsClient) throws InterruptedException {
         WordsClient.logger.log(Level.INFO, "isPartOfSpeechCorrect: the word " + word + " is being checked");
@@ -61,7 +65,8 @@ public class WordsProcessing {
 
         Iterator<String> iterator = words.iterator();
         int removedCounter = 0;
-        int id = 0;
+
+
         WordsClient.logger.log(Level.INFO, "getWords: Starting removing non-matching words from the list \n" + words);
 
         while (iterator.hasNext()) {

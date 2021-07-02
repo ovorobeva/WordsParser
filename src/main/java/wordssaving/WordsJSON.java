@@ -13,28 +13,42 @@ import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.JSONArray;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
+import wordsprocessing.WordsClient;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
 
 public class WordsJSON {
-    String path;
     private List<GeneratedWords> words;
-    Token token;
+    private final String BASE_URL = "https://raw.githubusercontent.com/ovorobeva/WordsParser/master/src/main/resources/";
+    List<GeneratedWords> loadedWords;
+    private Token token;
+    private WordsJSONApi wordsJSONApi;
 
-    public WordsJSON(List<GeneratedWords> words, String path, Token token) {
-        this.words = words;
-        this.path = path;
+
+    public WordsJSON(Token token) {
         this.token = token;
-
+        this.loadedWords = loadFileFromRepository();
     }
 
-    public void saveToFile() {
+    public int getLastId() {
+        return loadedWords.size();
+    }
+
+    public void saveToFile(List<GeneratedWords> words) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JSONArray wordsArray = new JSONArray();
-        File targetFile = new File(path + "\\words_source_v0.json");
+        for (GeneratedWords generatedWord : loadedWords) {
+            wordsArray.add(gson.toJson(generatedWord));
+        }
+        File targetFile = new File("src\\main\\resources\\words_source_v0.json");
 
         try (FileWriter writer = new FileWriter(targetFile)) {
             for (GeneratedWords generatedWord : words) {
@@ -74,13 +88,33 @@ public class WordsJSON {
             pushCommand.call();
 
         } catch (IOException | GitAPIException e) {
-        e.printStackTrace();
-    }
+            e.printStackTrace();
+        }
 
     }
 
 
-    public void getFileFromRepository() {
+    private List<GeneratedWords> loadFileFromRepository() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .build();
+        wordsJSONApi = retrofit.create(WordsJSONApi.class);
 
+        Call<List<GeneratedWords>> jsonFromRepositoryRequest = wordsJSONApi.sendRequest();
+
+        List<GeneratedWords> responseBody = null;
+        try {
+            Response<List<GeneratedWords>> response = jsonFromRepositoryRequest.execute();
+            if (response.isSuccessful()) {
+                responseBody = response.body();
+            } else
+
+                WordsClient.logger.log(Level.SEVERE, "There is an error during request by link " + response.raw().request().url() + " . Error code is: " + response.code());
+        } catch (IOException e) {
+            WordsClient.logger.log(Level.SEVERE, "Something went wrong. Error is: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return responseBody;
     }
 }
