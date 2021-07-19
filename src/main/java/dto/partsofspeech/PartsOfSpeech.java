@@ -1,7 +1,6 @@
 package dto.partsofspeech;
 
-import com.sun.istack.internal.Nullable;
-
+import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
