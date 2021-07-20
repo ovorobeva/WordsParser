@@ -81,7 +81,7 @@ public class WordsJSON {
     private void saveFileToRepository() {
         try {
             Repository repository = new FileRepository("D:\\Projects\\WordsParser\\.git");
-
+            System.setProperty("file.encoding", "UTF-8");
         Git git = new Git(repository) ;
             Status status = git.status().call();
             System.out.println("Uncommitted changes before commit are: " + status.getUncommittedChanges());
