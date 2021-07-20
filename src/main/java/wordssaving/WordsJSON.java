@@ -19,9 +19,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 import wordsprocessing.WordsClient;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -69,8 +72,7 @@ public class WordsJSON {
 
         File targetFile = new File("D:\\Projects\\WordsParser\\src\\main\\resources\\words_source_v0.json");
 
-        try (FileWriter writer = new FileWriter(targetFile)) {
-
+        try (BufferedWriter writer = Files.newBufferedWriter(targetFile.toPath(), StandardCharsets.UTF_8)) {
             writer.write(wordsArray.toString());
         } catch (IOException e) {
             e.printStackTrace();
