@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class WordsClient {
     private static final Object OBJECT = new Object();
     private static final String TAG = "Custom logs";
-    private static final short WORD_COUNT = 500;
+    private static final short WORD_COUNT = 5;
     public static Logger logger = Logger.getLogger(TAG);
     private static WordsClient wordsClient;
     private final String BASE_URL = "https://api.wordnik.com/v4/";
