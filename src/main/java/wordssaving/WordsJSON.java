@@ -125,7 +125,8 @@ public class WordsJSON {
                 responseBody = response.body();
             } else
 
-                WordsClient.logger.log(Level.SEVERE, "There is an error during request by link " + response.raw().request().url() + " . Error code is: " + response.code());
+
+            WordsClient.logger.log(Level.SEVERE, "There is an error during request by link " + response.raw().request().url() + " . Error code is: " + response.code());
         } catch (IOException e) {
             WordsClient.logger.log(Level.SEVERE, "Something went wrong during request by link " + jsonFromRepositoryRequest.request().url() + " . Error is: " + e.getMessage());
             e.printStackTrace();
