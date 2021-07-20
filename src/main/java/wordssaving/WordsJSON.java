@@ -69,6 +69,7 @@ public class WordsJSON {
 
         File targetFile = new File("D:\\Projects\\WordsParser\\src\\main\\resources\\words_source_v0.json");
 
+
         try (FileWriter writer = new FileWriter(targetFile)) {
 
             writer.write(wordsArray.toString());
